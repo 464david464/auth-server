@@ -3,14 +3,23 @@ const fs = require("fs");
 const author = require("./services/auth");
 var jwt = require("jsonwebtoken");
 const secret = "secret";
+const usrLIst = author.readUsers()
 
 const server = http.createServer(async (req, res) => {
   const { url, method, headers } = req;
 
+  const cookie = headers.cookie;
+  console.log('cookie', cookie);
+
   switch (url) {
     //loading pages
     case "/":
-      fs.createReadStream("./pages/home/index.html").pipe(res);
+      if(!cookie) {
+        fs.createReadStream("./pages/login/login.html").pipe(res);
+      }else {
+        fs.createReadStream("./pages/home/index.html").pipe(res);
+      }
+      
       break;
     case "/index.js":
       fs.createReadStream("./pages/home/index.js").pipe(res);
@@ -35,10 +44,12 @@ const server = http.createServer(async (req, res) => {
     case "/singin.js":
       fs.createReadStream("./pages/singin/singin.js").pipe(res);
       break;
+      case "/singin.css":
+        fs.createReadStream("./pages/singin/singin.css").pipe(res);
+        break;
+
 
     case "/privet":
-      const cookie = headers.cookie;
-      console.log('cookie', cookie);
       if(!cookie) {
         res.writeHead(302, {
           location: '/login'

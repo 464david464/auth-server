@@ -17,7 +17,7 @@ document.addEventListener("submit", (e) => {
     .then((res) => res.json())
     .then((res) => {
       if(res.isToken) {
-        window.location = '/privet'
+        window.location = '/'
       }
       console.log(res);
     });

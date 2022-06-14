@@ -62,4 +62,4 @@ function checkToken(token, secret) {
     }
 }
 
-module.exports = {storDataUser, hashPassowrd, compareHash, checkToken};
+module.exports = {readUsers, storDataUser, hashPassowrd, compareHash, checkToken};

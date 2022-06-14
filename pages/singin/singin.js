@@ -17,5 +17,8 @@ document.addEventListener("submit", (e) => {
     body: JSON.stringify(jsonData),
   })
     .then((res) => res.json())
-    .then((res) => console.log(res));
+    .then((res) => {
+      console.log(res);
+      document.querySelector('#res').innerHTML = res.msg
+    });
 });
