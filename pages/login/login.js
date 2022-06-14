@@ -13,5 +13,12 @@ document.addEventListener("submit", (e) => {
   }
   console.log(jsonData);
 
-  fetch("/api/log", { method: "GET", body: JSON.stringify(jsonData) });
+  fetch("/api/log", { method: "PUT", body: JSON.stringify(jsonData) })
+    .then((res) => res.json())
+    .then((res) => {
+      if(res.isToken) {
+        window.location = '/privet'
+      }
+      console.log(res);
+    });
 });
