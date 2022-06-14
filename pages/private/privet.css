@@ -1,0 +1,35 @@
+@font-face {
+    font-family: Metavers;
+    src: url(../../fonts/Metavers.ttf);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(121, 0, 121);
+    color: white;
+}
+
+header svg {
+    position: absolute;
+    top: 0px;
+    left: 20px;
+}
+
+h1 {
+    font-family: Metavers;
+    letter-spacing: 5px;
+    text-align: center;
+}
+main svg {
+    width: px;
+}
