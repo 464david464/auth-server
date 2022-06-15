@@ -85,7 +85,7 @@ nav {
      background-color: rgba(110, 143, 173, 0.144);
      border: 1px rgb(57, 99, 124) solid;
      padding: 0px 5px 0px 3px;
-
+    color: white;
  }
 
   input:focus {
@@ -118,4 +118,8 @@ button:hover {
     font-size: 18px;
     /* color: #c23636; */
     transform: translateY(110px);
+ }
+
+ input::placeholder{
+    color: white;
  }
