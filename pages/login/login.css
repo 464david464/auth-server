@@ -114,3 +114,9 @@ nav {
     border: 8px rgb(211, 127, 0) solid;
     font-size: 18px;
  }
+
+ #res {
+    font-size: 18px;
+    color: #c23636;
+    transform: translateY(110px);
+ }

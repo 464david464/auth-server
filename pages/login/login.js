@@ -1,4 +1,5 @@
 const form = document.querySelector("#f");
+const result = document.querySelector('#res');
 
 document.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -17,6 +18,11 @@ document.addEventListener("submit", (e) => {
       if(res.isToken) {
         window.location = '/'
       }
-      console.log(res);
+      if(!res.ststus) {
+        result.innerHTML = res.msg
+        setTimeout(() => {
+          document.querySelector("#res").innerHTML = ''
+        }, 1000);
+      }
     });
 });
