@@ -1,6 +1,6 @@
 const http = require("http");
 const fs = require("fs");
-const author = require("./services/auth");
+const author = require("./services/autorization");
 var jwt = require("jsonwebtoken");
 const secret = "secret";
 const usrLIst = author.readUsers()
@@ -9,7 +9,6 @@ const server = http.createServer(async (req, res) => {
   const { url, method, headers } = req;
 
   const cookie = headers.cookie;
-  console.log('cookie', cookie);
 
   switch (url) {
     //loading pages
@@ -57,9 +56,7 @@ const server = http.createServer(async (req, res) => {
         res.end()
       } else{
         const token = cookie.replace('token=', '')
-        console.log('token', token);
         const tokenRes = author.checkToken(token, secret)
-        console.log('tokenRes', tokenRes);
         if(tokenRes) {
           fs.createReadStream("./pages/private/privet.html").pipe(res);
         } else{
@@ -107,7 +104,6 @@ const server = http.createServer(async (req, res) => {
 
         const data = Buffer.concat(buffer).toString();
         const details = JSON.parse(data);
-        console.log(details);
 
         const userName = details.username;
         const pass = details.password;

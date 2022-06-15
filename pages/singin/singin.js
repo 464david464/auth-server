@@ -8,7 +8,6 @@ document.addEventListener("submit", (e) => {
   const data = new FormData(form);
 
   for (let [key, value] of data.entries()) {
-    console.log(key, value);
     jsonData[key] = value;
   }
 
@@ -18,7 +17,15 @@ document.addEventListener("submit", (e) => {
   })
     .then((res) => res.json())
     .then((res) => {
-      console.log(res);
-      document.querySelector('#res').innerHTML = res.msg
+      document.querySelector("#res").innerHTML = res.msg;
+      if (res.ststus) {
+        document.querySelector("#res").style.color = '#86ffc7'
+      } else {
+        document.querySelector("#res").style.color = '#c23636'
+      }
+
+      setTimeout(() => {
+        document.querySelector("#res").innerHTML = ''
+      }, 1000);
     });
 });

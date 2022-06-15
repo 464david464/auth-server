@@ -116,6 +116,6 @@ button:hover {
  }
  #res {
     font-size: 18px;
-    color: rgb(255, 23, 23);
+    /* color: #c23636; */
     transform: translateY(110px);
  }

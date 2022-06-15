@@ -25,7 +25,7 @@ function storDataUser(userName, pass) {
     usr.push({userName, pass});
 
     fs.writeFileSync(dataPath, JSON.stringify(usr))
-    return {msg: 'singin in acsess'}
+    return {ststus: true, msg: 'singin in acsess'}
 }
 
 
@@ -43,7 +43,6 @@ async function compareHash(userName, pass) {
     const usr = usres[i];
     if(usr.userName === userName){
         const passCompar = await bcrypt.compare(pass, usr.pass);
-        console.log(passCompar);
         return passCompar;
     }
        
