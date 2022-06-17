@@ -1,5 +1,6 @@
 const form = document.querySelector("#f");
 const result = document.querySelector('#res');
+const inputValue = document.querySelector('#usrName')
 
 document.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -16,6 +17,8 @@ document.addEventListener("submit", (e) => {
     .then((res) => res.json())
     .then((res) => {
       if(res.isToken) {
+          fetch('/sendUserName', {method: 'POST', body: inputValue.value})
+          console.log(inputValue.value);
         window.location = '/'
       }
       if(!res.ststus) {

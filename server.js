@@ -4,12 +4,13 @@ const author = require("./services/autorization");
 var jwt = require("jsonwebtoken");
 const secret = "secret";
 const usrLIst = author.readUsers()
+let userNAmeForLOgin;
 
 const server = http.createServer(async (req, res) => {
   const { url, method, headers } = req;
 
   const cookie = headers.cookie;
-
+  const decoded = jwt.decode(cookie, {complete: true});
   switch (url) {
     //loading pages
     case "/":
@@ -17,6 +18,9 @@ const server = http.createServer(async (req, res) => {
         fs.createReadStream("./pages/login/login.html").pipe(res);
       }else {
         fs.createReadStream("./pages/home/index.html").pipe(res);
+       
+        console.log(decoded)
+
       }
       
       break;
@@ -57,7 +61,9 @@ const server = http.createServer(async (req, res) => {
       } else{
         const token = cookie.replace('token=', '')
         const tokenRes = author.checkToken(token, secret)
-        if(tokenRes) {
+        console.log(tokenRes);
+        if(tokenRes.ststus) {
+          userNAmeForLOgin = tokenRes.info
           fs.createReadStream("./pages/private/privet.html").pipe(res);
         } else{
           res.writeHead(302, {
@@ -96,7 +102,8 @@ const server = http.createServer(async (req, res) => {
 
         const registerUser = author.storDataUser(userName, hash);
         res.end(JSON.stringify(registerUser));
-      } else if (method === "PUT") {
+      } else if 
+      (method === "PUT") {
         const buffer = [];
         for await (const chunk of req) {
           buffer.push(chunk);
@@ -121,9 +128,24 @@ const server = http.createServer(async (req, res) => {
             "Set-Cookie": `token= ${token};path=/`,
           });
         }
-        res.end(JSON.stringify({ msg: `login res is ${result}`, isToken }));
+        if(!result) {
+           res.end(JSON.stringify({ msg: `the name: ${userName} is not registered`, isToken }));
+        } else {
+          res.end(JSON.stringify({ msg: `login secses`, isToken }));
+        }
+       
+      } else if (method === 'GET') {
+        res.end(JSON.stringify({useNAme: userNAmeForLOgin}))
       }
       break;
+      case '/sendUserName':
+        const buffer = [];
+        for await (const chunk of req) {
+          buffer.push(chunk);
+        }
+        const data = Buffer.concat(buffer).toString();
+        userNAmeForLOgin = data
+        break;
 
     default:
       fs.createReadStream("./pages/404/404.html").pipe(res);

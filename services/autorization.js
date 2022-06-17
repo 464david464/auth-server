@@ -16,8 +16,9 @@ function readUsers() {
 
 function storDataUser(userName, pass) { 
     const usr = readUsers()
+    let user;
     for(let i = 0; i < usr.length; i++){
-        let user = usr[i]
+         user = usr[i]
         if(user.userName === userName) {
             return {status: false, msg: `user name ${userName} already in use`}
         }
@@ -25,7 +26,7 @@ function storDataUser(userName, pass) {
     usr.push({userName, pass});
 
     fs.writeFileSync(dataPath, JSON.stringify(usr))
-    return {ststus: true, msg: 'singin in acsess'}
+    return {ststus: true, msg: 'singin in acsess', userdit: JSON.stringify(user)}
 }
 
 
@@ -54,7 +55,9 @@ async function compareHash(userName, pass) {
 function checkToken(token, secret) {
     try{
         const res = jwt.verify(token, secret)
-        return true
+        const decoded = jwt.decode(token, {complete: true});
+        console.log('de', decoded.payload);
+        return {ststus: true, info: decoded.payload}
     } catch(error) {
         console.log(error);
         return false;

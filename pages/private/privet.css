@@ -19,10 +19,18 @@ body {
     color: white;
 }
 
-header svg {
+header nav svg {
     position: absolute;
     top: 0px;
     left: 20px;
+}
+
+header nav span {
+    font-size: 30px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    position: absolute;
+    top: 30px;
+    right: 30px;   
 }
 
 h1 {
